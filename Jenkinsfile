@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Checkout stage is running"
-                git branch: 'master', url: 'https://github.com/yourusername/healthrwanda-group1.git'
+                git branch: 'master', url: 'https://github.com/nanairagena/healthrwanda-group1.git'
             }
         }
         
