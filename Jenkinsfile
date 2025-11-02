@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,7 +8,7 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/nanairagena/healthrwanda-group1.git'
             }
         }
-        
+
         stage('Build') {
             steps {
                 echo "Build stage is running"
@@ -16,7 +16,7 @@ pipeline {
                 sh 'ls -la src/'
             }
         }
-        
+
         stage('Test') {
             steps {
                 echo "Test stage is running"
@@ -24,7 +24,7 @@ pipeline {
                 sh 'find src/ -name "*.php" | wc -l'
             }
         }
-        
+
         stage('Deploy') {
             steps {
                 echo "Deploy stage is running"
@@ -33,7 +33,7 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         }
-        
+
         stage('Verify') {
             steps {
                 echo "Verify stage is running"
@@ -43,16 +43,16 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             echo "HealthRwanda Pipeline completed"
         }
         success {
-            echo "✅ Pipeline executed successfully!"
+            echo "PIPELINE SUCCESS: Pipeline executed successfully!"
         }
         failure {
-            echo "❌ Pipeline failed!"
+            echo "PIPELINE FAILED: Pipeline failed!"
         }
     }
 }
