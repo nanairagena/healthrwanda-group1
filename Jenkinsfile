@@ -12,34 +12,34 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Build stage is running"
-                sh 'echo "Building HealthRwanda application..."'
-                sh 'ls -la src/'
+                bat 'echo "Building HealthRwanda application..."'
+                bat 'dir src\\'
             }
         }
 
         stage('Test') {
             steps {
                 echo "Test stage is running"
-                sh 'echo "Running automated tests..."'
-                sh 'find src/ -name "*.php" | wc -l'
+                bat 'echo "Running automated tests..."'
+                bat 'dir src\\*.php /s | find /c "\.php"'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo "Deploy stage is running"
-                sh 'echo "Deploying with Docker Compose..."'
-                sh 'docker-compose down || true'
-                sh 'docker-compose up -d'
+                bat 'echo "Deploying with Docker Compose..."'
+                bat 'docker-compose down || echo "No containers to stop"'
+                bat 'docker-compose up -d'
             }
         }
 
         stage('Verify') {
             steps {
                 echo "Verify stage is running"
-                sh 'echo "Verifying deployment..."'
-                sh 'sleep 10'
-                sh 'docker-compose ps'
+                bat 'echo "Verifying deployment..."'
+                bat 'timeout /t 10 /nobreak'
+                bat 'docker-compose ps'
             }
         }
     }
