@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo "Build stage is running"
                 bat 'echo "Building HealthRwanda application..."'
-                bat 'dir src\\'
+                bat 'dir src'
             }
         }
 
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo "Test stage is running"
                 bat 'echo "Running automated tests..."'
-                bat 'dir src\\*.php /s | find /c "\.php"'
+                bat 'dir src\\*.php /s /b | find /c ".php"'
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo "Deploy stage is running"
                 bat 'echo "Deploying with Docker Compose..."'
-                bat 'docker-compose down || echo "No containers to stop"'
+                bat 'docker-compose down'
                 bat 'docker-compose up -d'
             }
         }
